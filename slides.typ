@@ -14,7 +14,7 @@
 // The front slide is the first slide of your presentation
 #front-slide(
   title: "Control flow Abstractions",
-  subtitle: [Rank-Polymorphisms, Convolution, Recursion Schemes],
+  subtitle: [Rank-Polymorphism, Convolution, Recursion Schemes],
   authors: "Laszlo Korte",
   info: [#link("https://github.com/laszlokorte/elixir-meetup-2026-03")],
 )
@@ -76,7 +76,7 @@
 
 #slide(title: "Rank-Polymorphism: Array/Tensor Programming")[
     #cols(columns: (3fr, 1fr), gutter: 2em)[
-Applying operations to each element of an array.
+Applying operations to each element of an array:
 #line()
   ```ex
 doubled = for a <- [1,2,3] do
@@ -94,7 +94,7 @@ end
     #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-livebook%2Fblob%2Fmain%2Fhello.livemd", image("blue.svg"))
   ]
   ```ex
-#    --- VS ---
+# --- VS ---
 
 doubled  =   Nx.tensor([1,2,3]) |> Nx.multiply(2)
 product  =   Nx.tensor([1,2,3]) |> Nx.multiply([9,8,7])
@@ -102,21 +102,21 @@ product  =   Nx.tensor([1,2,3]) |> Nx.multiply([9,8,7])
 ]
 
 #slide(title: "Convolution (in german: Faltung)")[
-Combining elements with their neighborhood inside a structure (array).
+Combining elements with their neighborhood inside a structure (array):
   #line()
-    #cols(columns: (3fr, 1fr), gutter: 2em)[
-  ```ex
-import Enum, only: [chunk_every: 3, zip: 1]
-grid = [[1,0,1,1,0 ...],[1,0,1,0,0, ...], ...]
-
-for rows123 <- chunk_every(grid, 3, 1, :discard) do
-  for row <- rows123, do
-    row |> chunk_every(3, 1, :discard)
-        |> zip_with(&sum/1)
-  end |> zip_with(&sum/1)
+    #cols(columns: (3.2fr, 1fr), gutter: 2em)[
+```ex
+grid = [[0,1,1,0,1, ...], [1,0,1,0,1, ...], ...]
+for rows123 <- grid |> Enum.chunk_every(3, 1)  do
+  for row <- rows123 do
+    row
+    |> Enum.chunk_every(3, 1)
+    |> Enum.map(&Enum.sum/1)
+  end
+  |> Enum.zip_with(&Enum.sum/1)
 end
 
-#    --- VS ---
+# --- VS ---
 summed_neighbors = grid
   |> Nx.tensor()
   |> Nx.conv(Nx.broadcast(1, {3, 3}))
@@ -136,7 +136,7 @@ summed_neighbors = grid
 ]
 
 #slide(title: "Recursion Schemes: Enum.reduce, Stream.unfold...")[
-Producing, consuming and transforming recursive data structures
+Producing, consuming and transforming recursive data structures:
   #line()
 #cols(columns: (3fr, 1fr), gutter: 2em)[
 
@@ -174,7 +174,7 @@ Anamorphism.ana(3, &Tree.rec/2, &Tree.grow/1)
 #title-slide[Applications]
 
 #slide(title: "Application: Video and Image Processing (1)")[
-Generating Blue Noise for visual effects
+Generating Blue Noise for visual effects:
   #line()
 #cols(columns: (3fr, 1fr), gutter: 2em)[
 
@@ -202,7 +202,7 @@ Generating Blue Noise for visual effects
 ]
 
 #slide(title: "Application: Video and Image Processing (2)")[
-Other image transformations
+Other image transformations:
 #cols(columns: (3fr, 1fr), gutter: 2em)[
 
   #image("geomtric.png", width: 13cm)
@@ -255,6 +255,7 @@ $#text[Out] = sum_i^I sum_j^J A_(i j) B_(j i) C_j$
 ```ex
 defmodule Summation do
   import NxEinsum
+  # shorthand notation for n-D sum/product
   defeinsum(weighted_trace, "ij,ji,j->")
 end
 
@@ -271,16 +272,27 @@ out = Summation.weighted_trace(
     === `Nx.Einsum` \ Proof of concept
     #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-einsum%2Fblob%2Fmain%2Feinsum.livemd", image("blue.svg"))
 
+    #line()
+
+    #link("https://static.laszlokorte.de/einsum/")[
+      Interactive \
+      Web Demo
+    ]
+
 
   ]
 ]
 
 #focus-slide[
 #set text(size: 24pt)
+#context raw(
+  "iex(" + str(counter(page).get().first()) + ")> # 🤍 Thank you for attention",
+  block: true,
+  lang: "txt"
+)
+#v(1cm)
 ```
-iex(17)> # Thank you for attention
-
 BREAK: (q) Questions
-       (f) Feedback  (h) go hacking
+       (f) Feedback  (h) Go Hacking
 ```
 ]
