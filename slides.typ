@@ -35,18 +35,21 @@
     How many rolls of paper *in total* can be removed by the Elves and their forklifts?
   ][
     #set align(center)
-    ```
-..@@.@@@@.
-@@@.@.@.@@
-@@@@@.@.@@
-@.@@@@..@.
-@@.@@@@.@@
-.@@@@@@@.@
-.@.@.@.@@@
-@.@@@.@@@@
-.@@@@@@@@.
-@.@.@@@.@.
-    ```
+    #let code = read("input.txt")
+
+    #set text(font: "DejaVu Sans Mono", size: 1.2em)
+
+    #let cellSize = 1em
+    #grid(columns: (cellSize,)*10, rows: (cellSize,)*10, gutter: 0mm, row-gutter: 0mm, column-gutter: 0mm, align: center+horizon,
+      ..code.codepoints().filter(c => c != "\n").map(c => {
+              if c=="@" {
+                text(color.rgb("#952cae").darken(10%), top-edge: 1em, tracking: 0mm, weight: "bold", c)
+              } else {
+                text(gray,top-edge: 1em, tracking: 0mm, c)
+              }
+           })
+    )
+
   ]
 
 ]
@@ -56,7 +59,7 @@
 
   Multiple kinds of iteration:
   #line()
-  #cols(columns: (2fr, 1fr), gutter: 2em)[
+  #cols(columns: (3fr, 1fr), gutter: 2em)[
  == Counting
 
   - *for each* roll of paper: count the neighbors
@@ -67,9 +70,10 @@
   ][
     #set align(center)
     === AOC Day 4 \ Elixir Solution
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd", image("livebook.svg"))
   ]
 ]
+
 #title-slide[Abstractions]
 
 
@@ -86,25 +90,23 @@ end
 product = for {a, b} <- Enum.zip([1,2,3], [9,8,7]) do
   a * b
 end
-  ```
 
-  ][
-    #set align(center)
-    === Introduction to Elixir Nx
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-livebook%2Fblob%2Fmain%2Fhello.livemd", image("blue.svg"))
-  ]
-  ```ex
 # --- VS ---
 
 doubled  =   Nx.tensor([1,2,3]) |> Nx.multiply(2)
 product  =   Nx.tensor([1,2,3]) |> Nx.multiply([9,8,7])
   ```
+  ][
+    #set align(center)
+    === Introduction to Elixir Nx
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-livebook%2Fblob%2Fmain%2Fhello.livemd", image("livebook.svg"))
+  ]
 ]
 
 #slide(title: "Convolution (in german: Faltung)")[
 Combining elements with their neighborhood inside a structure (array):
-  #line()
-    #cols(columns: (3.2fr, 1fr), gutter: 2em)[
+#line()
+#cols(columns: (3.2fr, 1fr), gutter: 2em)[
 ```ex
 grid = [[0,1,1,0,1, ...], [1,0,1,0,1, ...], ...]
 for rows123 <- grid |> Enum.chunk_every(3, 1)  do
@@ -125,7 +127,7 @@ summed_neighbors = grid
   ][
     #set align(center)
    ===  Introduction to Elixir Nx
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-livebook%2Fblob%2Fmain%2Fhello.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-livebook%2Fblob%2Fmain%2Fhello.livemd", image("livebook.svg"))
 
     #line()
 
@@ -160,7 +162,7 @@ Anamorphism.ana(3, &Tree.rec/2, &Tree.grow/1)
   ][
     #set align(center)
    === Introduction to Recursion Schemes
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-recursion-livebook%2Fblob%2Fmain%2Fintro.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-recursion-livebook%2Fblob%2Fmain%2Fintro.livemd", image("livebook.svg"))
 
     #line()
 
@@ -179,19 +181,20 @@ Generating Blue Noise for visual effects:
 #cols(columns: (3fr, 1fr), gutter: 2em)[
 
   #grid(
-    columns: 3
+    columns: 3,
+    gutter: 5mm
   )[
-    #image("original.png")
+    #image("images/orig-blue.png", width: 100%, scaling: "pixelated")
   ][
-    #image("blur.png")
+     #image("images/blur.png", width: 100%, scaling: "pixelated")
   ][
-    #image("bur-blue.png")
+    #image("images/blue.png", width: 100%, scaling: "pixelated")
   ]
 
   ][
     #set align(center)
    === Generating Blue Noise
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fbluenoise-elixir%2Fblob%2Fmain%2Felixir_bluenoise.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fbluenoise-elixir%2Fblob%2Fmain%2Felixir_bluenoise.livemd", image("livebook.svg"))
 
     #line()
 
@@ -205,27 +208,56 @@ Generating Blue Noise for visual effects:
 Other image transformations:
 #cols(columns: (3fr, 1fr), gutter: 2em)[
 
-  #image("geomtric.png", width: 13cm)
+
+  #grid(
+    columns: 3,
+    gutter: 5mm
+  )[
+    #image("images/orig.png", width: 80%, scaling: "pixelated")
+  ][
+     #image("images/rot.png", width: 80%, scaling: "pixelated")
+  ][
+    #image("images/edges.png", width: 80%, scaling: "pixelated")
+  ][
+      #image("images/swirl.png", width: 80%, scaling: "pixelated")
+    ][
+       #image("images/orange-swirl.png", width: 80%, scaling: "pixelated")
+    ][
+      #image("images/fish.png", width: 80%, scaling: "pixelated")
+    ]
+
 
   ][
 
     #set align(center)
    === Introduction to Elixir Nx
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd", image("livebook.svg"))
 
   ]
 ]
 
 #title-slide[More Livebooks]
 
+#let icon(source, size-to: "P", scale: 1.0) = context {
+  let text-edge = measure(size-to).height
+  let text-bounds = measure(text(top-edge: "bounds", size-to)).height
+  let img = image(source, height: text-bounds * scale)
+  let extend = calc.max(0pt, text-bounds - text-edge) * scale
+  let shift = (text-bounds * scale - text-bounds) / 2
+  return box(img, height: text-bounds, inset: (top: -extend - shift, bottom: shift))
+}
+
 #slide(title: "Plotting Tensors in Livebook with Kino")[
 
 #cols(columns: (4fr, 2fr), gutter: 2em)[
 
-- `vega_lite` can be used to render images in Livebook.
+- *`vega_lite`* can be used to render images in Livebook, *but not* `Nx.Tensor`
 
-- `kino_zoetrope` for rendering 4D `Nx.Tensor` as slideshow #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd")[
-#image("zoetrope.svg", width: 3cm)]
+- *`kino_rewind`* for easy rendering of `Nx.Tensor` via `vega_lite` #h(1fr) #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd")[
+#icon("rewind.svg", scale: 1.5)]
+
+- *`kino_zoetrope`* for rendering 4D `Nx.Tensor` as slideshow *without* `vega_lite` #h(1fr) #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd")[
+#icon("zoetrope.svg", scale: 1.5)]
 
   ][
 
@@ -233,11 +265,17 @@ Other image transformations:
 
   === `vega_lite` Example
 
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fvega-lite-examples%2Fblob%2Fmain%2Fvegalite.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fvega-lite-examples%2Fblob%2Fmain%2Fvegalite.livemd", image("livebook.svg"))
+
+
+    === `kino_rewind` Example
+
+      #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fkino_rewind%2Fblob%2Fmain%2Fguides%2Fexample.livemd", image("livebook.svg"))
+
 
   === `kino_zoetrope` Example
 
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fkino_zoetrope%2Fblob%2Fmain%2Fguides%2Fexample.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fkino_zoetrope%2Fblob%2Fmain%2Fguides%2Fexample.livemd", image("livebook.svg"))
 
 
   ]
@@ -270,7 +308,7 @@ out = Summation.weighted_trace(
     #set align(center)
 
     === `Nx.Einsum` \ Proof of concept
-    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-einsum%2Fblob%2Fmain%2Feinsum.livemd", image("blue.svg"))
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-einsum%2Fblob%2Fmain%2Feinsum.livemd", image("livebook.svg"))
 
     #line()
 
