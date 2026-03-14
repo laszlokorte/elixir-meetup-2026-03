@@ -131,7 +131,7 @@ summed_neighbors = grid
 
     #line()
 
-    #link("https://static.laszlokorte.de/dft2d/")[
+    #link("https://static.laszlokorte.de/conv2d/")[
       Interactive \ Web Demo
     ]
   ]
@@ -253,10 +253,10 @@ Other image transformations:
 
 - *`vega_lite`* can be used to render images in Livebook, *but not* `Nx.Tensor`
 
-- *`kino_rewind`* for easy rendering of `Nx.Tensor` via `vega_lite` #h(1fr) #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd")[
+- *`kino_rewind`* for easy rendering of `Nx.Tensor` via `vega_lite` #h(1fr) #link("https://hex.pm/packages/kino_rewind")[
 #icon("rewind.svg", scale: 1.5)]
 
-- *`kino_zoetrope`* for rendering 4D `Nx.Tensor` as slideshow *without* `vega_lite` #h(1fr) #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd")[
+- *`kino_zoetrope`* for rendering 4D `Nx.Tensor` as slideshow *without* `vega_lite` #h(1fr) #link("https://hex.pm/packages/kino_zoetrope")[
 #icon("zoetrope.svg", scale: 1.5)]
 
   ][
