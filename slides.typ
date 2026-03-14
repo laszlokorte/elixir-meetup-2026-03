@@ -132,7 +132,7 @@ summed_neighbors = grid
     #line()
 
     #link("https://static.laszlokorte.de/conv2d/")[
-      Interactive \ Web Demo
+      Conv2D \ Web Demo
     ]
   ]
 ]
@@ -167,7 +167,7 @@ Anamorphism.ana(3, &Tree.rec/2, &Tree.grow/1)
     #line()
 
     #link("https://static.laszlokorte.de/recursion-schemes/")[
-      Interactive \ Web Demo
+      Recursion Schemes in JavaScript
     ]
   ]
 ]
@@ -184,11 +184,17 @@ Generating Blue Noise for visual effects:
     columns: 3,
     gutter: 5mm
   )[
-    #image("images/orig-blue.png", width: 100%, scaling: "pixelated")
+          #image("images/bluenoise.png", width: 80%, scaling: "pixelated")
+        ][
+           #image("images/bluenoise-discrete.png", width: 80%, scaling: "pixelated")
+        ][
+          #image("images/blue-spectrum.png", width: 80%, scaling: "pixelated")
+        ][
+    #image("images/orig-blue.png", width: 80%, scaling: "pixelated")
   ][
-     #image("images/blur.png", width: 100%, scaling: "pixelated")
+     #image("images/blur.png", width: 80%, scaling: "pixelated")
   ][
-    #image("images/blue.png", width: 100%, scaling: "pixelated")
+    #image("images/blue.png", width: 80%, scaling: "pixelated")
   ]
 
   ][
@@ -199,7 +205,13 @@ Generating Blue Noise for visual effects:
     #line()
 
     #link("https://static.laszlokorte.de/blue-noise/")[
-      Interactive \ Web Demo
+      Blue Noise \ Web Demo
+    ]
+
+    #line()
+
+    #link("https://static.laszlokorte.de/sspp-conv/")[
+      Stochastic Blur
     ]
   ]
 ]
@@ -333,4 +345,21 @@ out = Summation.weighted_trace(
 BREAK: (q) Questions
        (f) Feedback  (h) Go Hacking
 ```
+]
+
+
+#slide(title: "References")[
+
+  - Array-Programming on Youtube:\
+    https://www.youtube.com/@code_report
+
+  - Blue Noise in Real-Time rendering:\
+    https://www.youtube.com/watch?v=tethAU66xaA
+
+  - Einsum is all you need:\
+    https://rockt.ai/2018/04/30/einsum
+
+  - Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire\
+    https://maartenfokkinga.github.io/utwente/mmf91m.pdf
+
 ]
