@@ -90,7 +90,8 @@ end
 product = for {a, b} <- Enum.zip([1,2,3], [9,8,7]) do
   a * b
 end
-
+```
+```ex
 # --- VS ---
 
 doubled  =   Nx.tensor([1,2,3]) |> Nx.multiply(2)
@@ -244,6 +245,40 @@ Other image transformations:
     #set align(center)
    === Introduction to Elixir Nx
     #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Faoc2025-livebook%2Fblob%2Fmain%2Faoc.livemd", image("livebook.svg"))
+
+  ]
+]
+
+#slide(title: "Application: Video and Image Processing (3)")[
+
+  Convolutional Neural Networks:
+  #cols(columns: (3fr, 1fr), gutter: 2em)[
+    #grid(
+      columns: 3,
+      gutter: 5mm
+    )[
+                  #image("images/mnist8.png", width: 80%, scaling: "pixelated")
+                ][
+      #image("images/mnist4.png", width: 80%, scaling: "pixelated")
+    ][
+        #image("images/mnist5.png", width: 80%, scaling: "pixelated")
+      ][
+            #image("images/mnist2.png", width: 80%, scaling: "pixelated")
+          ][
+         #image("images/mnist6.png", width: 80%, scaling: "pixelated")
+      ][
+        Result:
+        #grid(align: center, columns: (8%, )* 10, row-gutter: 2mm, rows: 5mm, gutter: 0mm, ..range(0, 10).map((i) => {
+          rect(width: 100%, height: 100%, fill: if i == 5 { rgb("#f2dc23") } else if i == 3 { rgb("#30698b") } else if i == 8 { rgb("#5fb65f") } else { color.rgb("#480553") })
+                 }),  ..range(0, 10).map((i) => {
+                   [#i]
+                                 }))
+      ]
+  ][
+
+    #set align(center)
+   === Handwritten Digit Recognition
+    #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-mnist-livebook%2Fblob%2Fmain%2Fhandwriting.livemd", image("livebook.svg"))
 
   ]
 ]
