@@ -182,6 +182,7 @@ Generating Blue Noise for visual effects:
 #cols(columns: (3fr, 1fr), gutter: 2em)[
 
   #grid(
+    align: center,
     columns: 3,
     gutter: 5mm
   )[
@@ -223,6 +224,7 @@ Other image transformations:
 
 
   #grid(
+    align: center,
     columns: 3,
     gutter: 5mm
   )[
@@ -254,6 +256,7 @@ Other image transformations:
   Convolutional Neural Networks:
   #cols(columns: (3fr, 1fr), gutter: 2em)[
     #grid(
+      align: center,
       columns: 3,
       gutter: 5mm
     )[
@@ -279,6 +282,36 @@ Other image transformations:
     #set align(center)
    === Handwritten Digit Recognition
     #link("https://livebook.dev/run?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Felixir-nx-mnist-livebook%2Fblob%2Fmain%2Fhandwriting.livemd", image("livebook.svg"))
+
+  ]
+]
+
+
+#slide(title: "Application: Audio Processing (4)")[
+
+  Frequency Transforms
+  #cols(columns: (3fr, 1fr), gutter: 2em)[
+    #grid(align: center,
+      columns: 3,
+      gutter: 5mm
+    )[
+                  #image("images/wave.png", width: 80%, scaling: "pixelated")
+                ][
+      #image("images/wave2.png", width: 80%, scaling: "pixelated")
+    ][
+        #image("images/stft.png", width: 80%, scaling: "pixelated")
+      ][
+            #image("images/dft.png", width: 80%, scaling: "pixelated")
+          ][
+         #image("images/wave3.png", width: 80%, scaling: "pixelated")
+      ][
+        #align(center, "WIP")
+      ]
+  ][
+
+    #set align(center)
+   === NxAudio example
+    #link("https://livebook.dev/run/?url=https%3A%2F%2Fgithub.com%2Flaszlokorte%2Fnx-audio-livebook%2Fblob%2Fmain%2Fdsp-audio.livemd", image("livebook.svg"))
 
   ]
 ]
